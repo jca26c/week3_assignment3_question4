@@ -1,4 +1,4 @@
-require([
+ require([
       "esri/WebScene",
       "esri/views/SceneView",
       "esri/Camera",
@@ -17,7 +17,17 @@ require([
         }
       });
       
-      var camera = new Camera({
+      var home_btn = new Camera({
+       position: [
+           -71.060217,
+          42.382655,
+          2500// elevation in meters
+        ],
+        tilt:0,
+        heading: 0
+      })
+
+     var camera = new Camera({
        position: [
            -71.062146,
           42.366198,
@@ -45,16 +55,6 @@ require([
         ],
         tilt: 75,
         heading: -50
-      })
-      
-            var home_btn = new Home({
-       position: [
-           -71.1167,
-          42.3770,
-          2500// elevation in meters
-        ],
-        tilt:0,
-        heading: 0
       })
 
       var view = new SceneView({
@@ -84,6 +84,13 @@ require([
       button.style.display = 'flex';
       view.ui.add(button, 'top-right');
     });
+
+    td_garden.addEventListener('click', function() {
+      // reuse the default camera position already established in the homeBtn
+      view.goTo({
+        target:camera
+      });
+    });
     
     fen_park.addEventListener('click', function() {
       // reuse the default camera position already established in the homeBtn
@@ -92,12 +99,6 @@ require([
       });
     });
     
-    td_garden.addEventListener('click', function() {
-      // reuse the default camera position already established in the homeBtn
-      view.goTo({
-        target:camera
-      });
-    });
    
    downtown.addEventListener('click', function() {
       // reuse the default camera position already established in the homeBtn
